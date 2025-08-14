@@ -1,0 +1,509 @@
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #2E7D32;
+    --accent-color: #8BC34A;
+    --dark-color: #1B5E20;
+    --light-color: #C8E6C9;
+    --text-dark: #212121;
+    --text-light: #f5f5f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: var(--text-dark);
+}
+
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('logogrande.png') no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 1.5rem;
+    max-width: 800px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: var(--dark-color);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 20px;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+section {
+    padding: 80px 0;
+    position: relative;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: var(--dark-color);
+    text-align: center;
+}
+
+.weather-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.weather-controls button {
+    padding: 10px 20px;
+    background-color: var(--light-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.weather-controls button.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.weather-controls button:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.chart-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    height: 300px;
+}
+
+.chart-title {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: var(--dark-color);
+}
+
+/* MODIFICACIÓN PRINCIPAL: Estilos para tarjetas de 5 días */
+.weather-cards.five-days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end; /* Alinea las tarjetas a la derecha */
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.weather-cards:not(.five-days) {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.weather-cards.five-days .weather-card {
+    width: calc(20% - 15px); /* 5 tarjetas por fila con espacio */
+    min-width: 180px; /* Ancho mínimo para mantener legibilidad */
+}
+
+.weather-cards:not(.five-days) .weather-card {
+    width: 100%;
+}
+
+@media (max-width: 1200px) {
+    .weather-cards.five-days .weather-card {
+        width: calc(25% - 15px); /* 4 tarjetas por fila */
+    }
+}
+
+@media (max-width: 900px) {
+    .weather-cards.five-days .weather-card {
+        width: calc(33.333% - 15px); /* 3 tarjetas por fila */
+    }
+}
+
+@media (max-width: 600px) {
+    .weather-cards.five-days .weather-card {
+        width: calc(50% - 15px); /* 2 tarjetas por fila */
+    }
+}
+
+@media (max-width: 400px) {
+    .weather-cards.five-days .weather-card {
+        width: 100%; /* 1 tarjeta por fila */
+    }
+}
+
+.weather-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    flex: 1;
+    min-width: 250px; /* Ancho original para otras vistas */
+}
+
+.weather-card:hover {
+    transform: translateY(-5px);
+}
+
+.weather-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.weather-card .value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.weather-card .description {
+    color: #666;
+}
+
+.recommendations {
+    background-color: var(--light-color);
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 40px;
+}
+
+.recommendations h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--dark-color);
+}
+
+.recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.recommendation-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.recommendation-card p {
+    color: #666;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background-color: white;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    z-index: 1001;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.sidebar-content {
+    margin-top: 20px;
+}
+
+.sidebar-section {
+    margin-bottom: 30px;
+}
+
+.sidebar-section h4 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.sidebar-toggle {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    cursor: pointer;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    z-index: 1000;
+}
+
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 50px;
+}
+
+#desarrolladores {
+    background-color: var(--light-color);
+    padding: 50px;
+    border-radius: 15px;
+    margin-top: 425px;
+    margin-bottom: 50px; 
+    text-align: center;
+}
+
+#panel-desarrolladores {
+    min-height: 200px;
+    border: 2px dashed var(--accent-color);
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.info-desarrolladores{
+    text-align: left;
+}
+
+.lema-desarrolladores{
+    text-align: center;
+}
+
+.week-group {
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.week-header {
+    background-color: var(--light-color);
+    padding: 15px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.week-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.week-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.week-days {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.week-days.collapsed {
+    display: none;
+}
+
+.agro-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+
+.agro-info-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.agro-info-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.agro-info-card p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.agro-info-card ul {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.agro-info-card li {
+    margin-bottom: 8px;
+}
+
+.agro-indicator {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.agro-indicator .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.favorable {
+    background-color: #4CAF50;
+}
+
+.moderate {
+    background-color: #FFC107;
+}
+
+.unfavorable {
+    background-color: #F44336;
+}
+
+#agro-info {
+    padding-bottom: 100px; 
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+    
+    .hero p {
+        font-size: 1.2rem;
+    }
+    
+    nav ul {
+        flex-wrap: wrap;
+    }
+    
+    nav ul li {
+        margin: 5px 10px;
+    }
+    
+    .sidebar {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .sidebar.active {
+        right: 0;
+    }
+    
+    #desarrolladores {
+        padding: 30px 15px;
+        margin-top: 60px;
+    }
+    
+    .week-days {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .agro-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
